@@ -30,10 +30,21 @@ namespace netcore_oauth
                     options.Authority = "http://localhost:5001";
                     options.RequireHttpsMetadata = false;
                 });
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                .Build());
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors("CorsPolicy");
             app.UseIdentityServer();
             app.UseAuthentication();
 
