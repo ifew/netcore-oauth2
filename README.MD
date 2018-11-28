@@ -13,3 +13,5 @@ dotnet run
 cd client
 dotnet run
 ```
+
+or try with javascript on /client/jquery.html
