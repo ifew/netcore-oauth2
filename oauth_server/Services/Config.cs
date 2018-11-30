@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
 
 namespace netcore_oauth
@@ -31,18 +32,33 @@ namespace netcore_oauth
                     {
                         new Client
                         {
+                            // Server-Side Client
                             ClientId = "clientID",
-                            // no interactive user, use the clientid/secret for authentication
                             AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                            // secret for authentication
                             ClientSecrets =
                             {
                                 new Secret("secretPassword".Sha256())
                             },
-
-                            // scopes that client has access to
                             AllowedScopes = { "User.info" }
+                        },
+                        new Client 
+                        {
+                            // JavaScript Client
+                            ClientId = "clientJS",
+                            ClientName = "JavaScript Client",
+                            AllowedGrantTypes = GrantTypes.Implicit,
+                            AllowAccessTokensViaBrowser = true,
+
+                            RedirectUris =           { "http://localhost:5000/callback.html" },
+                            PostLogoutRedirectUris = { "http://localhost:5000/restrict_area.html" },
+                            AllowedCorsOrigins =     { "http://localhost:5000" },
+
+                            AllowedScopes =
+                            {
+                                IdentityServerConstants.StandardScopes.OpenId,
+                                IdentityServerConstants.StandardScopes.Profile,
+                                "User.info"
+                            }
                         }
                     };
         }

@@ -34,10 +34,10 @@ namespace netcore_oauth
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
+                    builder => //builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:5000")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials()
                 .Build());
             });
         }
