@@ -29,6 +29,7 @@ namespace netcore_oauth
                 {
                     options.Authority = "http://localhost:5001";
                     options.RequireHttpsMetadata = false;
+                    options.ApiName = "User.info";
                 });
             
             services.AddCors(options =>

@@ -55,7 +55,6 @@ namespace netcore_oauth
 
                             AllowedScopes =
                             {
-                                IdentityServerConstants.StandardScopes.OpenId,
                                 IdentityServerConstants.StandardScopes.Profile,
                                 "User.info"
                             }
